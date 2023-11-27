@@ -34,7 +34,7 @@ const getUserById = (req, res) => {
   
     database
       .query(
-        "INSERT INTO movies(title, director, year, color, duration) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO users (firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)",
         [firstname, lastname, email, city, language]
       )
       .then(([result]) => {
