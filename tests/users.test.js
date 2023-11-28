@@ -95,7 +95,7 @@ describe("PUT /api/users/:id", () => {
     const newUser = {
       firstname: "David",
       lastname: "Cameron",
-      email: "exemple@wild.com",
+      email: `${crypto.randomUUID()}@wild.co`,
       city: "Lyon",
       language: "french",
     };
@@ -116,7 +116,7 @@ describe("PUT /api/users/:id", () => {
     const updatedUser = {
       firstname: "Luca",
       lastname: "Updated",
-      email: "updated@wild.me",
+      email: `${crypto.randomUUID()}@wild.co`,
       city: "Nice",
       language: "Spanish",
     };
