@@ -168,7 +168,7 @@ describe("PUT /api/users/:id", () => {
       language: 162,
     };
 
-    const response = await request(app).put("/api/movies/0").send(newUser);
+    const response = await request(app).put("/api/users/0").send(newUser);
 
     expect(response.status).toEqual(404);
   });
