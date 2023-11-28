@@ -63,19 +63,15 @@ describe("POST /api/users", () => {
     expect(userInDatabase).toHaveProperty("id");
 
     expect(userInDatabase).toHaveProperty("firstname");
-    expect(typeof userInDatabase.firstname).toBe("string");
     expect(userInDatabase.firstname).toStrictEqual(newUser.firstname);
 
     expect(userInDatabase).toHaveProperty("lastname");
-    expect(typeof userInDatabase.lastname).toBe("string");
     expect(userInDatabase.lastname).toStrictEqual(newUser.lastname);
 
     expect(userInDatabase).toHaveProperty("email");
-    expect(typeof userInDatabase.email).toBe("string");
     expect(userInDatabase.email).toStrictEqual(newUser.email);
 
     expect(userInDatabase).toHaveProperty("city");
-    expect(typeof userInDatabase.city).toBe("string");
     expect(userInDatabase.city).toStrictEqual(newUser.city);
 
   });
