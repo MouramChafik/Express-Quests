@@ -14,7 +14,7 @@ const getUserById = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(422);
       });
   };
   const getUsers = (req, res) => {
@@ -25,7 +25,7 @@ const getUserById = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(422);
       });
   };
 
@@ -43,7 +43,7 @@ const getUserById = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(422);
       });
   };
 
@@ -67,7 +67,7 @@ const updateUsers = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(422);
       });
   };
 
