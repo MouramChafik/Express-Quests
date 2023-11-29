@@ -163,13 +163,56 @@ describe("PUT /api/users/:id", () => {
     const newUser = {
       firstname: "Avatar",
       lastname: "James Cameron",
-      email: "2009",
-      city: "1",
-      language: 162,
+      email: `${crypto.randomUUID()}@wild.co`,
+      city: true,
+      language: "french",
     };
 
     const response = await request(app).put("/api/users/0").send(newUser);
 
     expect(response.status).toEqual(404);
+  });
+});
+
+//test Delete route 
+
+describe("DELETE /api/users/:id", () => {
+  it("should delete a user", async () => {
+    const newUser = {
+      firstname: "John",
+      lastname: "Doe",
+      email:`${crypto.randomUUID()}@wild.co`,
+      city: "New York",
+      language: "English",
+    };
+
+    const [insertResult] = await database.query(
+      "INSERT INTO users (firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)",
+      [
+        newUser.firstname,
+        newUser.lastname,
+        newUser.email,
+        newUser.city,
+        newUser.language,
+      ]
+    );
+
+    const userIdToDelete = insertResult.insertId; 
+
+    const response = await request(app).delete(`/api/users/${userIdToDelete}`);
+
+    expect(response.status).toEqual(204); 
+
+    const [selectResult] = await database.query("SELECT * FROM users WHERE id=?", [
+      userIdToDelete,
+    ]);
+
+    expect(selectResult.length).toEqual(0);
+  });
+
+  it("should return a 404 if trying to delete a non-existent user", async () => {
+    const response = await request(app).delete(`/api/users/0`);
+
+    expect(response.status).toEqual(404); 
   });
 });
