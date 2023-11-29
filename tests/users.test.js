@@ -163,9 +163,9 @@ describe("PUT /api/users/:id", () => {
     const newUser = {
       firstname: "Avatar",
       lastname: "James Cameron",
-      email: "2009",
-      city: "1",
-      language: 162,
+      email: `${crypto.randomUUID()}@wild.co`,
+      city: true,
+      language: "french",
     };
 
     const response = await request(app).put("/api/users/0").send(newUser);
