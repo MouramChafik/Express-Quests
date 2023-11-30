@@ -169,3 +169,47 @@ describe("PUT /api/movies/:id", () => {
     expect(response.status).toEqual(404);
   });
 });
+
+
+//test Delete route 
+
+describe("DELETE /api/movies/:id", () => {
+  it("should delete a movie", async () => {
+    const newMovie = {
+      title: "Dark and light",
+      director: "James Wild",
+      year: "2023",
+      color: false,
+      duration: 140,
+    };
+
+    const [insertResult] = await database.query(
+      "INSERT INTO movies(title, director, year, color, duration) VALUES (?, ?, ?, ?, ?)",
+      [
+        newMovie.title,
+        newMovie.director,
+        newMovie.year,
+        newMovie.color,
+        newMovie.duration,
+      ]
+    );
+
+    const movieIdToDelete = insertResult.insertId; 
+
+    const response = await request(app).delete(`/api/movies/${movieIdToDelete}`);
+
+    expect(response.status).toEqual(204); 
+
+    const [selectResult] = await database.query("SELECT * FROM movies WHERE id=?", [
+      movieIdToDelete,
+    ]);
+
+    expect(selectResult.length).toEqual(0);
+  });
+
+  it("should return a 404 if trying to delete a non-existent movie ", async () => {
+    const response = await request(app).delete(`/api/movies/0`);
+
+    expect(response.status).toEqual(404); 
+  });
+});
